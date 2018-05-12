@@ -98,16 +98,47 @@
 
 /*****************************************************************************/
 
-static const struct of_device_id fusb301_id[] = {
+static int  fusb301_typec_resume(struct i2c_client *client)
+{
+	return 0;
+}
+
+static int  fusb301_typec_suspend(struct i2c_client *client, pm_message_t message)
+{
+	return 0;
+}
+
+static int fusb301_typec_remove(struct i2c_client *client)
+{
+	return 0;
+}
+
+static int fusb301_typec_probe(struct i2c_client *client, const struct i2c_device_id *id)
+{
+	return 0;
+}
+
+static const struct i2c_device_id fusb301_typec_i2c_id[] = {
+	{ "fusb301", 0 },
+	{ }
+};
+
+static const struct of_device_id fusb301_typec_id[] = {
 		{.compatible = "fusb301"},
 		{},
 };
+MODULE_DEVICE_TABLE(of, fusb301_typec_id);
 
 static struct i2c_driver fusb301_i2c_driver = {
 	.driver = {
 		.name = "fusb301",
-		.of_match_table = of_match_ptr(fusb301_id),
+		.of_match_table = of_match_ptr(fusb301_typec_id),
 	},
+	.probe    = fusb301_typec_probe,
+	.remove   = fusb301_typec_remove,
+	.suspend  = fusb301_typec_suspend,
+	.resume	  = fusb301_typec_resume,
+	.id_table = fusb301_typec_i2c_id,
 };
 
 
