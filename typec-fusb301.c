@@ -98,7 +98,16 @@
 
 /*****************************************************************************/
 
+static const struct of_device_id fusb301_id[] = {
+		{.compatible = "fusb301"},
+		{},
+};
+
 static struct i2c_driver fusb301_i2c_driver = {
+	.driver = {
+		.name = "fusb301",
+		.of_match_table = of_match_ptr(fusb301_id),
+	},
 };
 
 
