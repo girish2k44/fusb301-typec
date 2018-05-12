@@ -98,13 +98,18 @@
 
 /*****************************************************************************/
 
+static struct i2c_driver fusb301_i2c_driver = {
+};
+
+
 static __init int fusb301_i2c_init(void)
 {
-	return 0;
+	return i2c_add_driver(&fusb301_i2c_driver);
 }
 
 static __exit void fusb301_i2c_exit(void)
 {
+	i2c_del_driver(&fusb301_i2c_driver);
 }
 
 module_init(fusb301_i2c_init);
